@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+
+<h2>Select the date that you would like transcribed</h2>
+<h4> For the number: {{ phoneNum }}</h4>
+
+  <form action="" method="post">
+      <div class="form-group">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Date</th>
+          </tr>
+         </thead>
+         <tbody>
+            {% for key in form.dateGiven %}
+            <tr>
+              <td>{{ key }}</td>
+              <td>{{ key.label }} </td>
+
+            </tr>
+            {%endfor%}
+         </tbody>
+        </table>
+         <button onclick="myFunction()" type="submit" class="btn btn-primary">Get Transcription</button>
+      </div>
+  </form>
+  <a href="/" class="btn btn-primary active" role="button" aria-pressed="true">Home</a>
+</div>
+
+
+{% endblock %}

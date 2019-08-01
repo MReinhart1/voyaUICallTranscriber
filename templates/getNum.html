@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Enter in the persons name</h1>
+      <form action="" method="post">
+          <div class="form-group">
+            <p>
+             {{ form2.name.label }}<br>
+             {{ form2.name(size=30) }}<br><br>
+             <button type="submit" class="btn btn-primary">Find</button>
+            </p>
+          </div>
+      </form>
+    </div>
+    <div class="col">
+      <h1>Enter in the phone number</h1>
+      <form action="" method="post">
+          <div class="form-group">
+            <p>
+             {{ form.phoneNum.label }}<br>
+             {{ form.phoneNum(size=30) }}<br><br>
+             <button type="submit" class="btn btn-primary">Find</button>
+            </p>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h1>Here is the transcription</h1>
+
+<p>
+  {% for word in transcript.split(' ') %}
+  {{word}}
+  {% if word =="Agent:"%}
+  <br>
+  {%endif%}
+  {%endfor%}
+</p>
+
+<a href="/" class="btn btn-primary active" role="button" aria-pressed="true">Home</a>
+
+</div>
+{% endblock %}
