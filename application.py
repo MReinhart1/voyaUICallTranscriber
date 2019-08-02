@@ -7,7 +7,6 @@ import json
 import transcribe
 
 
-
 # App config.
 DEBUG = True
 app = Flask(__name__, static_url_path='/templates')
