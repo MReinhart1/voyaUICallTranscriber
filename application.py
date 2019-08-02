@@ -41,14 +41,24 @@ def getNumber():
     if (formName.is_submitted() and formName.name.data):
         result = request.form
         name = result['name']
+        if name[0].islower():
+            name.split(" ")
+            first = name[0][0].upper() + name[0][1:]
+            last = name[1][0].upper() + name[0][1:]
+            name = first + last
         # Look up the persons name in to find their phone number and submit the form that way
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table('nametophonepoc')
-        name = table.get_item(Key={'name': name})
-        phoneNumber = name['Item']['phoneNum']
-        call = "/selectCall/" + phoneNumber[1:]
-        return redirect(call)
-    return render_template("getNum.html", form=formNum, form2=formName)
+        try:
+            name = table.get_item(Key={'name': name})
+            phoneNumber = name['Item']['phoneNum']
+            call = "/selectCall/" + phoneNumber[1:]
+            return redirect(call)
+        except:
+            message = "Could not find this person in the database"
+            return render_template("getNum.html", form=formNum, form2=formName, message=message)
+    message = " "
+    return render_template("getNum.html", form=formNum, form2=formName, message=message)
 
 
 @app.route('/selectCall/<phoneNum>', methods=['GET', 'POST'])

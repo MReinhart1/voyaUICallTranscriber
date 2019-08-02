@@ -11,5 +11,5 @@ class getDateForm(FlaskForm):
 
 
 class getName(FlaskForm):
-    name = StringField('Please enter in the customers name: ')
+    name = StringField('Please enter in the customers first and last name:  ')
     submit = SubmitField('Find')
