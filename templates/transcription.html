@@ -7,12 +7,9 @@
 <h1>Here is the transcription</h1>
 
 <p>
-  {% for word in transcript.split(' ') %}
-  {{word}}
-  {% if word =="Agent:"%}
-  <br>
-  {%endif%}
-  {%endfor%}
+  {% for para in transcript.split('\n') %}
+    <p>{{para}}</p>
+  {% endfor %}
 </p>
 
 <a href="/" class="btn btn-primary active" role="button" aria-pressed="true">Home</a>
