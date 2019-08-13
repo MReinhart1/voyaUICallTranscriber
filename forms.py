@@ -13,3 +13,6 @@ class getDateForm(FlaskForm):
 class getName(FlaskForm):
     name = StringField('Please enter in the customers first and last name:  ')
     submit = SubmitField('Find')
+
+class playaudio(FlaskForm):
+    submit = SubmitField('Listen to Call')

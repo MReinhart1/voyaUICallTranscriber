@@ -62,6 +62,7 @@ def getNumber():
 
 @app.route('/selectCall/<phoneNum>', methods=['GET', 'POST'])
 def selectCall(phoneNum):
+    audio_play = playaudio()
     listofbuckets = []
     masterInfoList = []
     for obj in bucket.objects.all():
@@ -70,15 +71,25 @@ def selectCall(phoneNum):
             listofbuckets.append((obj.key, call[1]))
     formDate = getDateForm()
     formDate.dateGiven.choices = listofbuckets
-    if formDate.is_submitted():
+    if formDate.is_submitted() or audio_play.is_submitted():
         result = request.form
         filename = result["dateGiven"]
         fileNum = str(filename.split("/")[0])
         fileDate = str(filename.split("/")[1])
         fileWAV = str(filename.split("/")[-1])
         transcript = transcribe.main(fileNum, fileDate, fileWAV )
-        return render_template("transcription.html", transcript=transcript)
+        #play=False
+        #if audio_play.is_submitted():
+            #play = get_audio(filename,fileWAV)
+        audio_name= 'https://crmcustomeraudio.s3.amazonaws.com/' + filename
+        #audio_path = 'static/'+fileWAV
+        return render_template("transcription.html", transcript=transcript,audio_name=audio_name)
     return render_template('giveDates.html', phoneNum=phoneNum,form=formDate, listofbuckets=listofbuckets)
+
+def get_audio(filename,fileWAV):
+    s3 = boto3.resource("s3")
+    s3.meta.client.download_file('crmcustomeraudio',filename,'static/'+fileWAV)
+    return True
 
 if __name__ == "__main__":
     app.run()
