@@ -83,13 +83,13 @@ def selectCall(phoneNum):
             #play = get_audio(filename,fileWAV)
         audio_name= 'https://crmcustomeraudio.s3.amazonaws.com/' + filename
         #audio_path = 'static/'+fileWAV
+
         return render_template("transcription.html", transcript=transcript,audio_name=audio_name)
     return render_template('giveDates.html', phoneNum=phoneNum,form=formDate, listofbuckets=listofbuckets)
 
-def get_audio(filename,fileWAV):
-    s3 = boto3.resource("s3")
-    s3.meta.client.download_file('crmcustomeraudio',filename,'static/'+fileWAV)
-    return True
+@app.route('/results', methods = ['Get'])
+def give_results():
+    return render_template('results.html')
 
 if __name__ == "__main__":
     app.run()

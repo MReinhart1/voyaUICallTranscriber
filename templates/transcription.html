@@ -8,12 +8,12 @@
 
 <p>
   {% for para in transcript.split('\n') %}
-    <p>{{para}}</p>
+  <p>{{para}}</p>
   {% endfor %}
 </p>
 
 <a href="/" class="btn btn-primary active" role="button" aria-pressed="true">Home</a>
 <a href="{{audio_name}}" class="btn btn-primary active" role="button" aria-pressed="true">Listen to Call</a>
-
+<a href="/results" class="btn btn-primary active" role="button" aria-pressed="true">View Confidence</a>
 
 {% endblock %}
