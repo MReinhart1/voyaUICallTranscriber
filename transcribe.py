@@ -1,6 +1,7 @@
 import boto3
 import json
 import time
+import re
 
 def main(number, date, fileWAV):
 #"18609704538"
@@ -75,7 +76,7 @@ def main(number, date, fileWAV):
         for i, row in enumerate(utter):
             # add coloring for confidence levels < .85:
             if row[1] == 'pronunciation' and float(row[3]) <= .85:
-                row[0] = "\033[43m" + row[0] + "\033[m"
+                row[0] = '('+row[2]+') '+"\033[43m" + row[0] + "\033[m"
 
             if row[-1].upper() == line[:5]:
                 if row[1] == 'pronunciation':
@@ -116,6 +117,7 @@ def main(number, date, fileWAV):
         s3_path = 'transcripts/' + phone_num + '/' + file_name
         txt_file_simple = txt_file.replace("\033[43m",'')
         txt_file_simple = txt_file_simple.replace('\033[m','')
+        txt_file_simple = re.sub(r'\((\d+\.\d+)\)','',txt_file_simple)
         file1 = open('static/my_file.txt','w')
         file1.write('Customer transcription for '+name+' on '+date+':\n\n')
         file1.write(txt_file_simple)
