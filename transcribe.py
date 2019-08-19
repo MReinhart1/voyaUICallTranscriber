@@ -26,7 +26,7 @@ def main(number, date, fileWAV):
     except:
         pass
 
-    def get_transcript(job_name,key):
+    def get_transcript(job_name,key,date):
         from boto3.dynamodb.conditions import Key, Attr
         s3client = boto3.client('s3')
         timeout = time.time() + 60 * 4  # 3 minutes from now
@@ -113,9 +113,16 @@ def main(number, date, fileWAV):
 
         txt_file = txt_file.replace('SPK_0', 'Agent')
         file_name = job_name + '.txt'
-        s3_path = 'transcripts/' + file_name
+        s3_path = 'transcripts/' + phone_num + '/' + file_name
         txt_file_simple = txt_file.replace("\033[43m",'')
         txt_file_simple = txt_file_simple.replace('\033[m','')
+        file1 = open('static/my_file.txt','w')
+        file1.write('Customer transcription for '+name+' on '+date+':\n\n')
+        file1.write(txt_file_simple)
+        file1.close()
+        s3 = boto3.client('s3')
+        s3.upload_file('static/my_file.txt','crmaudiobucket1',s3_path)
+
 
         #build the results.html file that prints low confidence words in red
         html_text = '''{% extends "base.html" %}
@@ -141,5 +148,5 @@ def main(number, date, fileWAV):
             'body': s3_path,
             'txt': txt_file_simple
             }
-    output = get_transcript(job_name[:-4],job_name[:-4]+'.json')['txt']
+    output = get_transcript(job_name[:-4],job_name[:-4]+'.json',str(date))['txt']
     return output
