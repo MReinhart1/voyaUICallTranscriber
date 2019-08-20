@@ -30,7 +30,7 @@ def main(number, date, fileWAV):
     def get_transcript(job_name,key,date):
         from boto3.dynamodb.conditions import Key, Attr
         s3client = boto3.client('s3')
-        timeout = time.time() + 60 * 4  # 3 minutes from now
+        timeout = time.time() + 60 * 8  # 5 minutes from now
         #print(job_name)
         #print(s3client.list_objects(Bucket='transcriptedfilescgurry')['Contents'])
         while True:
@@ -43,6 +43,7 @@ def main(number, date, fileWAV):
                     json_content = json.loads(file_content)
                     break
                 except:
+                    print("timeout")
                     break
         #print(json_content)
         word_items = json_content['results']['items']
@@ -118,6 +119,7 @@ def main(number, date, fileWAV):
         txt_file_simple = txt_file.replace("\033[43m",'')
         txt_file_simple = txt_file_simple.replace('\033[m','')
         txt_file_simple = re.sub(r'\((\d+\.\d+)\)','',txt_file_simple)
+        txt_file_simple = txt_file_simple.replace('\n','\n\n')
         file1 = open('static/my_file.txt','w')
         file1.write('Customer transcription for '+name+' on '+date+':\n\n')
         file1.write(txt_file_simple)
