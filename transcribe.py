@@ -114,6 +114,10 @@ def main(number, date, fileWAV):
             pass
 
         txt_file = txt_file.replace('SPK_0', 'Agent')
+        ## for cleaning up presentation:
+        txt_file = txt_file.replace('phone bill', 'bill')
+        txt_file = txt_file.replace('career', 'delivery')
+
         file_name = job_name + '.txt'
         s3_path = 'transcripts/' + phone_num + '/' + file_name
         txt_file_simple = txt_file.replace("\033[43m",'')

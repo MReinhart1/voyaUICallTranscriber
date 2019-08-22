@@ -2,7 +2,7 @@ Customer transcription for Piper on 2019-8-18:
 
 Agent: Thank you for calling Voya. My name is Ashley. How may I help you today?
 
-Piper: I'm calling because I received the wrong bill. I just  paid my phone bill two days ago and my payment is not reflected in the bill.
+Piper: I'm calling because I received the wrong bill. I just  paid my bill two days ago and my payment is not reflected in the bill.
 
 Agent: Sorry for the inconvenience, sir. May I have your account number, please?
 
@@ -16,7 +16,7 @@ Agent: Thank you for the information per our  system's data. You did pay your la
 
 Piper: Thank you.
 
-Agent:  Delays in the bill is usually caused by delays in our career services. Very more up to date  Bill. For your account, you can visit our  web  site and log into your account. This bill is the most up  today.
+Agent:  Delays in the bill is usually caused by delays in our delivery services. Very more up to date  Bill. For your account, you can visit our  web  site and log into your account. This bill is the most up  today.
 
 Piper: Okay, I will.
 
